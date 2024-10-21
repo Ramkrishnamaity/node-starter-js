@@ -4,7 +4,7 @@ import cors from 'cors'
 import logger from "morgan"
 import { fileURLToPath } from 'url';
 import RootApiRouter from './routes/index.js'
-// import { connectDB } from './lib/config/Database.js'
+import { connectDB } from './lib/config/Database.js'
 
 const PORT = process.env.PORT || 4080
 const __filename = fileURLToPath(import.meta.url);
@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use("/uploads", express.static(path.join(__dirname, "../uploads")))
+app.use(express.static(path.join(__dirname, "../public")))
 app.use(logger("dev"))
 app.use(
 	cors({
@@ -24,7 +24,7 @@ app.use(
 )
 
 
-// connectDB()
+connectDB()
 
 
 app.use('/api/v1', RootApiRouter)
