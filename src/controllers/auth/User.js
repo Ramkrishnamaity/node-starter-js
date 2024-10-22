@@ -2,8 +2,6 @@ import { compareSync, genSaltSync, hashSync } from "bcrypt"
 import { CreateToken, InputValidator, StatusCode } from "../../lib/utils/index.js"
 import UserModel from "../../models/User.js"
 
-
-
 const login = async (req, res) => {
     try {
 
@@ -44,8 +42,6 @@ const login = async (req, res) => {
                 message: error
             })
         })
-
-
 
     } catch (error) {
         res.status(StatusCode.SERVER_ERROR).json({

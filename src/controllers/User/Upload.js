@@ -2,8 +2,6 @@
 import { pushOnBucket } from "../../lib/utils/Bucket.js"
 import { StatusCode } from "../../lib/utils/index.js"
 
-
-
 const fileUpload = async (req, res) => {
     try {
 

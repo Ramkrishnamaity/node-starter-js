@@ -1,5 +1,5 @@
 {
-  "name": "igr-backend",
+  "name": "nodejs-starter",
   "version": "1.0.0",
   "main": "app.js",
   "type": "module",
@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "dotenv -e .env node ./src/app.js",
-    "dev": "dotenv -e .env nodemon"
+    "dev": "dotenv -e .env nodemon",
+    "lint": "eslint --fix"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.670.0",
@@ -17,9 +18,14 @@
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.1",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "node-input-validator": "^4.5.1",
+    "nodemailer": "^6.9.15"
   },
   "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.7"
   }

@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { StatusCode } from './index.js'
 
-
 const middleware = async (req, res, next) => {
     try {
         const token = req.header("Authorization")

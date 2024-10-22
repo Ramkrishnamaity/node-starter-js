@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
-
+import { Validator } from 'node-input-validator'
+import { createTransport } from "nodemailer"
 
 export const StatusCode = {
 	SUCCESS: 200,

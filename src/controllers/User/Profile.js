@@ -1,6 +1,6 @@
+import { Types } from "mongoose"
 import { StatusCode } from "../../lib/utils/index.js"
 import UserModel from "../../models/User.js"
-
 
 const getProfile = async (req, res) => {
 	try {
