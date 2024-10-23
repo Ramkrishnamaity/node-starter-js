@@ -8,7 +8,11 @@ export default [
     rules: {
       "no-unused-vars": "warn",
       "no-undef": "error",
-      "no-multiple-empty-lines": ["error", { max: 1 }]
+      "no-console": "warn",
+      "no-multiple-empty-lines": ["error", { max: 1 }],
+      "semi": ["warn", "always"],
+      "quotes": ["warn", "double"],
+      "@typescript-eslint/no-explicit-any": "off"
     }
   }
-]
+];

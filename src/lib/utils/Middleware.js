@@ -1,36 +1,36 @@
-import jwt from 'jsonwebtoken'
-import { StatusCode } from './index.js'
+import jwt from "jsonwebtoken";
+import { StatusCode } from "./index.js";
 
 const middleware = async (req, res, next) => {
     try {
-        const token = req.header("Authorization")
+        const token = req.header("Authorization");
 
         if (!token) {
             res.status(StatusCode.AUTH_ERROR).json({
                 status: false,
-                message: 'Credential Not Found!',
-            })
+                message: "Credential Not Found!",
+            });
         } else {
             try {
-                const decode = jwt.verify(token, process.env.JWT_SECRET)
-                req.user = decode
-                next()
+                const decode = jwt.verify(token, process.env.JWT_SECRET);
+                req.user = decode;
+                next();
             } catch (error) {
                 res.status(StatusCode.AUTH_ERROR).json({
                     status: false,
-                    message: 'Token Expired!',
+                    message: "Token Expired!",
                     error
-                })
+                });
             }
         }
 
     } catch (error) {
         res.status(StatusCode.SERVER_ERROR).json({
             status: false,
-            message: 'Server Error!',
+            message: "Server Error!",
             error
-        })
+        });
     }
-}
+};
 
-export default middleware
+export default middleware;

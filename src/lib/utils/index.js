@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken"
-import { Validator } from 'node-input-validator'
-import { createTransport } from "nodemailer"
+import jwt from "jsonwebtoken";
+import { Validator } from "node-input-validator";
+import { createTransport } from "nodemailer";
 
 export const StatusCode = {
 	SUCCESS: 200,
@@ -11,36 +11,36 @@ export const StatusCode = {
 	AUTH_ERROR: 401,
 	NOT_FOUND_ERROR: 404,
 	TOKEN_EXPIRE: 419
-}
+};
 
-export const CreateToken = (payload, expiresIn = '1d') => {
-	return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn })
-}
+export const CreateToken = (payload, expiresIn = "1d") => {
+	return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn });
+};
 
 export const InputValidator = async (input, rules) => {
 	return new Promise((resolve, reject) => {
-		const v = new Validator(input, rules)
+		const v = new Validator(input, rules);
 		v.check()
 			.then((match) => {
 				if (!match) {
-					const error = (Object.values(v.errors)[0]).message
-					reject(error)
+					const error = (Object.values(v.errors)[0]).message;
+					reject(error);
 				} else {
-					resolve()
+					resolve();
 				}
 			})
 			.catch((error) => {
-				reject(error)
-			})
-	})
-}
+				reject(error);
+			});
+	});
+};
 
 export const MailSender = async (email, title, body) => {
 	try {
 
-		const host = process.env.MAIL_HOST
-		const user = process.env.MAIL_USER
-		const pass = process.env.MAIL_PASS
+		const host = process.env.MAIL_HOST;
+		const user = process.env.MAIL_USER;
+		const pass = process.env.MAIL_PASS;
 
 		const configOptions = {
 			host: host,
@@ -50,17 +50,17 @@ export const MailSender = async (email, title, body) => {
 				user: user,
 				pass: pass
 			}
-		}
-		const transporter = createTransport(configOptions)
+		};
+		const transporter = createTransport(configOptions);
 		await transporter.sendMail({
 			from: "Project ORG.",
 			to: `${email}`,
 			subject: `${title}`,
 			html: `${body}`
-		})
-		return true
+		});
+		return true;
 	} catch (error) {
-		console.log("Error in Mail Send: ", error)
-		return false
+		console.log("Error in Mail Send: ", error);
+		return false;
 	}
-}
+};

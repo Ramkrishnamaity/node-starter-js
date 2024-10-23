@@ -1,6 +1,6 @@
-import { compareSync, genSaltSync, hashSync } from "bcrypt"
-import { CreateToken, InputValidator, StatusCode } from "../../lib/utils/index.js"
-import UserModel from "../../models/User.js"
+import { compareSync, genSaltSync, hashSync } from "bcrypt";
+import { CreateToken, InputValidator, StatusCode } from "../../lib/utils/index.js";
+import UserModel from "../../models/User.js";
 
 const login = async (req, res) => {
     try {
@@ -10,29 +10,29 @@ const login = async (req, res) => {
             password: "required|minLength:6",
         }).then(async () => {
 
-            const { email, password } = req.body
+            const { email, password } = req.body;
 
-            const user = await UserModel.findOne({ email })
+            const user = await UserModel.findOne({ email });
             if (!user) {
                 res.status(StatusCode.NOT_FOUND_ERROR).json({
                     status: false,
-                    message: 'User Not Found!'
-                })
+                    message: "User Not Found!"
+                });
             } else {
                 if (!compareSync(password, user.password)) {
                     res.status(StatusCode.AUTH_ERROR).json({
                         status: false,
-                        message: 'User or Password Not Match!'
-                    })
+                        message: "User or Password Not Match!"
+                    });
                 } else {
-                    const token = CreateToken({ _id: user._id })
+                    const token = CreateToken({ _id: user._id });
                     res.status(StatusCode.SUCCESS).json({
                         status: true,
-                        message: 'Logged In Successfully.',
+                        message: "Logged In Successfully.",
                         data: {
                             token
                         }
-                    })
+                    });
                 }
             }
 
@@ -40,17 +40,17 @@ const login = async (req, res) => {
             res.status(StatusCode.VALIDATION_ERROR).json({
                 status: false,
                 message: error
-            })
-        })
+            });
+        });
 
     } catch (error) {
         res.status(StatusCode.SERVER_ERROR).json({
             status: false,
-            message: 'Server Error!',
+            message: "Server Error!",
             error
-        })
+        });
     }
-}
+};
 
 const register = async (req, res) => {
     try {
@@ -61,17 +61,17 @@ const register = async (req, res) => {
             password: "required|minLength:6",
         }).then(async () => {
 
-            const { email, password } = req.body
+            const { email, password } = req.body;
 
-            const user = await UserModel.findOne({ email })
+            const user = await UserModel.findOne({ email });
             if (user) {
                 res.status(StatusCode.BAD_REQUEST).json({
                     status: false,
-                    message: 'User Already Exist!'
-                })
+                    message: "User Already Exist!"
+                });
             } else {
-                const salt = genSaltSync(10)
-                const hashedPassword = hashSync(password, salt)
+                const salt = genSaltSync(10);
+                const hashedPassword = hashSync(password, salt);
 
                 UserModel.create({
                     ...req.body,
@@ -79,15 +79,15 @@ const register = async (req, res) => {
                 }).then(() => {
                     res.status(StatusCode.SUCCESS).json({
                         status: true,
-                        message: 'User Added Successfully.'
-                    })
+                        message: "User Added Successfully."
+                    });
                 }).catch((error) => {
                     res.status(StatusCode.SERVER_ERROR).json({
                         status: false,
-                        message: 'Server Error!',
+                        message: "Server Error!",
                         error
-                    })
-                })
+                    });
+                });
 
             }
 
@@ -95,21 +95,21 @@ const register = async (req, res) => {
             res.status(StatusCode.VALIDATION_ERROR).json({
                 status: false,
                 message: error
-            })
-        })
+            });
+        });
 
     } catch (error) {
         res.status(StatusCode.SERVER_ERROR).json({
             status: false,
-            message: 'Server Error!',
+            message: "Server Error!",
             error
-        })
+        });
     }
-}
+};
 
 const UserAuthController = {
     login,
     register
-}
+};
 
-export default UserAuthController
+export default UserAuthController;

@@ -1,6 +1,6 @@
-import { Types } from "mongoose"
-import { StatusCode } from "../../lib/utils/index.js"
-import UserModel from "../../models/User.js"
+import { Types } from "mongoose";
+import { StatusCode } from "../../lib/utils/index.js";
+import UserModel from "../../models/User.js";
 
 const getProfile = async (req, res) => {
 	try {
@@ -19,7 +19,7 @@ const getProfile = async (req, res) => {
 					__v: 0
 				}
 			}
-		])
+		]);
 
 		userData.length !== 0 ?
 			res.status(StatusCode.SUCCESS).json({
@@ -30,19 +30,19 @@ const getProfile = async (req, res) => {
 			res.status(StatusCode.NOT_FOUND_ERROR).json({
 				status: false,
 				message: "User Not Found!"
-			})
+			});
 
 	} catch (error) {
 		res.status(StatusCode.SERVER_ERROR).json({
 			status: false,
 			message: "Server Error!",
 			error
-		})
+		});
 	}
-}
+};
 
 const UserProfileController = {
     getProfile
-}
+};
 
-export default UserProfileController
+export default UserProfileController;

@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model } from "mongoose";
 
 const UserSchema = new Schema({
     name: {
@@ -12,8 +12,7 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
     image: {
         type: String,
@@ -23,8 +22,8 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     }
-}, { timestamps: true })
+}, { timestamps: true });
 
-const UserModel = model('users', UserSchema)
+const UserModel = model("users", UserSchema);
 
-export default UserModel
+export default UserModel;
